@@ -28,18 +28,22 @@ where ptest+1 is the product of 4 by 107 odd primes that are roughly evenly spac
 The syntax and option for the compilation can be check by running `make help`, which prints the following
 
 Syntax:
-        make [bench_isog/tune] BITS=[9216/test] STYLE=[df] CORES=[1/2/4/8]
+        make [csidh/bench/bench_isog/tune] BITS=[512/1024/1792/2048/3072/4096/5120/6144/8192/9216/test] STYLE=[df] CORES=[1/2/4/8]
 
-Options: 
+Options:
+        csidh - compute a randomized instance of the protocol
+        bench - benchmark several instances of the protocol
         bench_isog - benchmark the performace of idividual isogenies of each degree (does not require STYLE)
         tune - the exhaustive search program to tune the ijk parameters of square-root velu (does not require STYLE)
 
         BITS - the prime size
-        STYLE - dummy-free (df)
+        STYLE - choice of MCR(wd1), OAYT (wd2), dummy-free (df)
         CORES - number of cores (8 only available for ptest)
 
+        *BITS=test only compatible with bench_isog* 
+
 Tests:
-        make test BITS=[512/1024/1792/2048/3072/4096/5120/6144/8192/9216]
+        make test BITS=[512/1024/1792/2048/3072/4096/5120/6144/8192/9216/test] 
 
         Compiles binaries for tests at all the layers of the code.
 
@@ -57,10 +61,10 @@ make test BITS=1024
 ./poly_redc_fp1024.test
 ./mont-fp1024.test
 ./isog-fp1024.test
-# One run of equential CSIDH
+# One run of sequential CSIDH
 make csidh BITS=2048 STYLE=wd2 CORES=1
 ./csidh.2048-wd2.main
-# Benchmark of parallel SQALE'd CSIDH
+# Benchmark parallel isogenies 
 make bench-isog BITS=test STYLE=df CORES=2
 ./csidh-test-df-2core.bench-isog
 ```
