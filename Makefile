@@ -37,6 +37,8 @@ test: config fp$(BITS).test \
 	make isog-test BITS=$(BITS) CORES=1
 	make isog-test BITS=$(BITS) CORES=2
 	make isog-test BITS=$(BITS) CORES=4
+	make isog-test BITS=$(BITS) CORES=8
+	make isog-test BITS=$(BITS) CORES=16
 	make gae-test BITS=$(BITS) STYLE=wd1 CORES=1
 	make gae-test BITS=$(BITS) STYLE=wd2 CORES=1
 	make gae-test BITS=$(BITS) STYLE=df  CORES=1
@@ -86,6 +88,8 @@ isog_bench-all:
 		make isog_bench BITS=$$b CORES=1 ; \
 		make isog_bench BITS=$$b CORES=2 ; \
 		make isog_bench BITS=$$b CORES=4 ; \
+		make isog_bench BITS=$$b CORES=8 ; \
+		make isog_bench BITS=$$b CORES=16 ; \
 	done
 
 tune: config csidh-$(BITS)-$(STYLE)-$(CORES)core.tune
